@@ -1,0 +1,9 @@
+*.sublime-project 
+*.sublime-workspace 
+start-grunt.bat 
+.sass-cache 
+/node_modules/* 
+/grafika-nieskompresowana/* 
+/roboczy/* 
+/css/*.css.map 
+/www/* 
