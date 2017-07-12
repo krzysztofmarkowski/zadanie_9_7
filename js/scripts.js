@@ -33,7 +33,15 @@ function setGameElements() {
             break;
         case 'ended':
             newGameBtn.innerText = 'Again?';
+            newGameElem.style.display = 'block';
+            pickElem.style.display = 'none';
+            resultsElem.style.display = 'none';
+            break;
         case 'notStarted':
+            newGameElem.style.display = 'block';
+            pickElem.style.display = 'none';
+            resultsElem.style.display = 'none';
+            break;
         default:
             newGameElem.style.display = 'block';
             pickElem.style.display = 'none';
@@ -83,28 +91,29 @@ function checkRoundWinner(playerPick, computerPick) {
 
     if (playerPick == computerPick) {
         winnerIs = 'noone';
-        setGamePoints();
-        whoWin();
     } else if (
-        (computerPick == 'rock' &&  playerPick == 'scissors') ||
-        (computerPick == 'scissors' &&  playerPick == 'paper') ||
-        (computerPick == 'paper' &&  playerPick == 'rock')) {
+        (computerPick === 'rock' &&  playerPick === 'scissors') ||
+        (computerPick === 'scissors' &&  playerPick === 'paper') ||
+        (computerPick === 'paper' &&  playerPick === 'rock')) {
         
-        winnerIs = 'computer';
-        setGamePoints();
-        whoWin();
-    } if (winnerIs == 'player') {
+        winnerIs = 'computer';        
+    } 
+    awardingPoints(winnerIs);
+}
+
+
+function awardingPoints(winnerIs) {
+    if (winnerIs == 'player') {
         playerResultElem.innerHTML = "Wygrana!";
         player.score++;
-        setGamePoints();
-        whoWin();
     } else if (winnerIs == 'computer') {
         computerResultElem.innerHTML = "Wygrana!";
-        computer.score++;
-        setGamePoints();
-        whoWin();
+        computer.score++;        
     }
+    setGamePoints();
+    whoWin();
 }
+
 
 function setGamePoints() {
     playerPointsElem.innerHTML = player.score;
@@ -116,7 +125,7 @@ function whoWin() {
         alert('Winner is... ' + player.name + '!!!');
         gameState = 'ended';
         setGameElements();
-    } else if (computer.score == 10) {
+    } else if (computer.score === 10) {
         alert('Your PC win :/');
         gameState = 'ended';
         setGameElements();
